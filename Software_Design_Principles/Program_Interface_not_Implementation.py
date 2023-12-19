@@ -1,31 +1,36 @@
 from abc import ABC, abstractmethod
+from typing import List
 
 
-class Food(ABC):
+class Employee(ABC):
     @abstractmethod
-    def get_nutrition(self):
+    def do_work(self):
         pass
 
 
-class Sausage(Food):
-    def get_nutrition(self):
-        return "Calories, protein, fat"
-
-    def get_color(self):
-        return "Red"
-
-    def get_expiration(self):
-        return "2 weeks from Production"
+class Designer(Employee):
+    def do_work(self):
+        print("Designing architecture.")
 
 
-class Cat:
-    def __init__(self) -> None:
-        self.energy = 0
+class Programmer(Employee):
+    def do_work(self):
+        print("Coding")
 
-    def eat(self, food: Food):
-        print(f"Eating food with nutrition: {food.get_nutrition()}")
-        self.energy += 100
 
-my_cat = Cat()
-my_sausage = Sausage()
-my_cat.eat(my_sausage)
+class Company:
+    def __init__(self):
+        self.employees: List[Employee] = []
+
+    def add_employee(self, employee: Employee):
+        self.employees.append(employee)
+
+    def create_software(self):
+        for employee in self.employees:
+            employee.do_work()
+
+
+FRAUDIO = Company()
+FRAUDIO.add_employee(Designer())
+FRAUDIO.add_employee(Programmer())
+FRAUDIO.create_software()
